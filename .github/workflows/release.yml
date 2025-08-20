@@ -1,19 +1,13 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-          description: 'Version to release'
-          required: true
-          default: ''
   push:
     tags:
       - 'v*'
 
 env:
   ARTIFACT_NAME: strohalm-backend
-  VERSION: ${{ github.event.inputs.version != '' && github.event.inputs.version || github.ref_name }}
+  VERSION: ${{ github.ref_name }}
 
 jobs:
   build:
@@ -31,5 +25,6 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v2
+      if: github.ref_type == 'tag'
       with:
         files: ${{ env.ARTIFACT_NAME }}
