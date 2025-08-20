@@ -26,7 +26,7 @@ func InitDatabase() {
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS customers (
             Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            Name TEXT NOT NULL,
+            Name TEXT NOT NULL
         )
 	`)
 	initPanic(err, "Failed to create table `customers`")
@@ -36,7 +36,7 @@ func InitDatabase() {
             Id INTEGER PRIMARY KEY AUTOINCREMENT,
 			CustomerId INTEGER,
 			VisitDate TEXT NOT NULL,
-			FOREIGN KEY (CustomerId) REFERENCES customers(Id),
+			FOREIGN KEY (CustomerId) REFERENCES customers(Id)
         )
 	`)
 	initPanic(err, "Failed to create table `visits`")

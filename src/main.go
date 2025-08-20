@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	InitDatabase()
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
