@@ -1,13 +1,19 @@
 name: Release
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+          description: 'Version to release'
+          required: true
+          default: ''
   push:
     tags:
       - 'v*'
 
 env:
   ARTIFACT_NAME: strohalm-backend
-  VERSION: ${{ github.ref_name }}
+  VERSION: ${{ github.event.inputs.version != '' && github.event.inputs.version || github.ref_name }}
 
 jobs:
   build:
